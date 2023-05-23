@@ -69,7 +69,6 @@ def pygments(key, value, format, _):
 
 
     if format == "asciidoc":
-
         # Fix chapter cross ref
         # if key == "Link" and value[2][0].startswith("#chapter"):
         #     return RawInline("asciidoc", f"<<{value[2][0][1:]}>>")
@@ -156,7 +155,6 @@ def pygments(key, value, format, _):
             return RawBlock("asciidoc", result)
 
     elif format == "html4":
-
         # Only keep <!--H...H---> comments
         if key == "RawBlock":
             try:
@@ -183,7 +181,7 @@ def pygments(key, value, format, _):
             if classes:
                 language = classes[0]
                 # stderr.write(f"{key}\t{value}\t{format}\n")
-                result = "<pre>" + conv.convert(code, full=False) + "</pre>"
+                result = f"<pre>{conv.convert(code, full=False)}</pre>"
 
                 # Turn code callout number into unicode char
                 result = callout_code_re.sub(lambda x: f"<span class=\"callout\">&#{int(x.group(1))+10121};</span>", result)
